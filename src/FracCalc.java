@@ -4,13 +4,10 @@ public class FracCalc {
     public static void main(String[] args) {
         // TODO: Read the input from the user and call produceAnswer with an equation
         Scanner input = new Scanner(System.in);
-        String userInput = input.next();
-        Fraction fraccy = new Fraction();
-        while (!(userInput.equals("quit"))){
-            userInput = input.next();
-            produceAnswer(userInput);
+        String userInput = input.nextLine();
+        System.out.println(produceAnswer(userInput));
 
-        }
+
 
 
     }
@@ -31,27 +28,81 @@ public class FracCalc {
         String operator = foo.next();
         String frac2 = foo.next();
 
-        Fraction fraction1 = new Fraction(frac1);
-        Fraction fraction2 = new Fraction(frac2);
-        fraction1.toImproper();
-        fraction2.toImproper();
+        int frac1num = 0;
+        int frac2num = 0;
+        int frac1denom = 0;
+        int frac2denom = 0;
+
+        if (frac1.contains("_")){
+            Scanner w = new Scanner(frac1);
+            w.useDelimiter("_");
+            int frac1whole = w.nextInt();
+
+            Scanner frac1scan = new Scanner(w.next());
+            frac1scan.useDelimiter("/");
+            frac1num = frac1scan.nextInt();
+            frac1denom = frac1scan.nextInt();
+            frac1num += (frac1whole * frac1denom);
+
+        }
+        else {
+            Scanner frac1scan = new Scanner(frac1);
+            frac1scan.useDelimiter("/");
+            frac1num = frac1scan.nextInt();
+            if (frac1scan.hasNextInt()){
+                frac1denom = frac1scan.nextInt();
+            }
+            else {
+                frac1denom = 1;
+            }
+        }
+
+        if (frac2.contains("_")){
+            Scanner w = new Scanner(frac2);
+            w.useDelimiter("_");
+            int frac2whole = w.nextInt();
+
+            Scanner frac2scan = new Scanner(w.next());
+            frac2scan.useDelimiter("/");
+            frac2num = frac2scan.nextInt();
+            frac2denom = frac2scan.nextInt();
+            frac2num += (frac2whole * frac2denom);
+
+        }
+        else {
+            Scanner frac2scan = new Scanner(frac2);
+            frac2scan.useDelimiter("/");
+            frac1num = frac2scan.nextInt();
+            if (frac2scan.hasNextInt()){
+                frac2denom = frac2scan.nextInt();
+            }
+            else {
+                frac2denom = 1;
+            }
+        }
 
         if (operator.equals("+")){
-            fraction1.add(fraction2);
+            int numSum = (frac1num * frac2denom) + (frac2num * frac1denom);
+            int denomSum = (frac1denom * frac2denom);
+            return "" + numSum + "/" + denomSum;
         }
-        else if (operator.equals("-")){
-            fraction1.subtract(fraction2);
+        if (operator.equals("-")){
+            int numDif = (frac1num * frac2denom) - (frac2num * frac1denom);
+            int denomDif = (frac1denom * frac2denom);
+            return "" + numDif + "/" + denomDif;
         }
-        else if (operator.equals("*")){
-            fraction1.multiply(fraction2);
+        if (operator.equals("/")){
+            int numQuo = frac1num * frac2denom;
+            int denomQuo = frac2num * frac1denom;
+            return "" + numQuo + "/" + denomQuo;
         }
-        else if (operator.equals("/")){
-            fraction1.divide(fraction2);
+        if (operator.equals("*")) {
+            int numPro = frac1num * frac2num;
+            int denomPro = frac1denom * frac2denom;
+            return "" + numPro + "/" + denomPro;
         }
 
-        return fraction2.toAnswer();
-
-
+        return "";
     }
 
     // TODO: Fill in the space below with any helper methods that you think you will need
