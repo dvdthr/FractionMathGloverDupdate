@@ -32,11 +32,11 @@ public class FracCalc {
         int frac2num = 0;
         int frac1denom = 0;
         int frac2denom = 0;
-
+        int frac1whole = 0;
         if (frac1.contains("_")){
             Scanner w = new Scanner(frac1);
             w.useDelimiter("_");
-            int frac1whole = w.nextInt();
+            frac1whole = w.nextInt();
 
             Scanner frac1scan = new Scanner(w.next());
             frac1scan.useDelimiter("/");
@@ -44,6 +44,11 @@ public class FracCalc {
             frac1denom = frac1scan.nextInt();
             frac1num += (frac1whole * frac1denom);
 
+        }
+        else if (!(frac2.contains("_") || frac2.contains("/"))) {
+            Scanner w = new Scanner(frac2);
+            frac1num = w.nextInt();
+            frac1denom = 1;
         }
         else {
             Scanner frac1scan = new Scanner(frac1);
@@ -56,11 +61,11 @@ public class FracCalc {
                 frac1denom = 1;
             }
         }
-
+            int frac2whole = 0;
         if (frac2.contains("_")){
             Scanner w = new Scanner(frac2);
             w.useDelimiter("_");
-            int frac2whole = w.nextInt();
+            frac2whole = w.nextInt();
 
             Scanner frac2scan = new Scanner(w.next());
             frac2scan.useDelimiter("/");
@@ -69,10 +74,15 @@ public class FracCalc {
             frac2num += (frac2whole * frac2denom);
 
         }
+        else if (!(frac2.contains("_") || frac2.contains("/"))) {
+            Scanner w = new Scanner(frac2);
+            frac2num = w.nextInt();
+            frac2denom = 1;
+        }
         else {
             Scanner frac2scan = new Scanner(frac2);
             frac2scan.useDelimiter("/");
-            frac1num = frac2scan.nextInt();
+            frac2num = frac2scan.nextInt();
             if (frac2scan.hasNextInt()){
                 frac2denom = frac2scan.nextInt();
             }
@@ -82,14 +92,26 @@ public class FracCalc {
         }
 
         if (operator.equals("+")){
+            if (frac1denom != frac2denom){
             int numSum = (frac1num * frac2denom) + (frac2num * frac1denom);
             int denomSum = (frac1denom * frac2denom);
             return "" + numSum + "/" + denomSum;
+            }
+            else {
+                int numSum = frac1num + frac2num;
+                int denomSum = frac1denom;
+            }
         }
         if (operator.equals("-")){
-            int numDif = (frac1num * frac2denom) - (frac2num * frac1denom);
-            int denomDif = (frac1denom * frac2denom);
-            return "" + numDif + "/" + denomDif;
+            if (frac1denom != frac2denom) {
+                int numDif = (frac1num * frac2denom) - (frac2num * frac1denom);
+                int denomDif = (frac1denom * frac2denom);
+                return "" + numDif + "/" + denomDif;
+            }
+            else {
+                int numDif = frac1num - frac2num;
+                int denomDif = frac1denom;
+            }
         }
         if (operator.equals("/")){
             int numQuo = frac1num * frac2denom;
@@ -102,7 +124,8 @@ public class FracCalc {
             return "" + numPro + "/" + denomPro;
         }
 
-        return "";
+        //return "whole:" + frac2whole + " numerator:" + frac2num + " denominator:" + frac2denom;
+        return
     }
 
     // TODO: Fill in the space below with any helper methods that you think you will need
