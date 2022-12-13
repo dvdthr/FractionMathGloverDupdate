@@ -5,16 +5,16 @@ public class FracCalc {
         // TODO: Read the input from the user and call produceAnswer with an equation
         Scanner input = new Scanner(System.in);
         String userInput = input.next();
-        while (true){
+        Fraction fraccy = new Fraction();
+        while (!(userInput.equals("quit"))){
             userInput = input.next();
-            if (userInput.equals("quit")){
-                break;
-            }
+            produceAnswer(userInput);
+
         }
 
-        produceAnswer(userInput);
+
     }
-    
+
     // ** IMPORTANT ** DO NOT DELETE THIS FUNCTION.  This function will be used to test your code
     // This function takes a String 'input' and produces the result
     //
@@ -30,45 +30,27 @@ public class FracCalc {
         String frac1 = foo.next();
         String operator = foo.next();
         String frac2 = foo.next();
-        
-        int wholeFrac1 = 0;
-        int wholeFrac2 = 0;
-        int numFrac1 = 0;
-        int numFrac2 = 0;
-        int denomFrac1 = 0;
-        int denomFrac2 = 0;
 
-        Scanner bar = new Scanner(frac1);
-        if (frac1.contains("_")) {
-            bar.useDelimiter("_");
-            wholeFrac1 = bar.nextInt();
-            bar.useDelimiter("/");
-            numFrac1 = bar.nextInt();
-            denomFrac1 = bar.nextInt();
+        Fraction fraction1 = new Fraction(frac1);
+        Fraction fraction2 = new Fraction(frac2);
+        fraction1.toImproper();
+        fraction2.toImproper();
+
+        if (operator.equals("+")){
+            fraction1.add(fraction2);
         }
-        else {
-            bar.useDelimiter("/");
-            numFrac1 = bar.nextInt();
-            denomFrac1 = bar.nextInt();
+        else if (operator.equals("-")){
+            fraction1.subtract(fraction2);
+        }
+        else if (operator.equals("*")){
+            fraction1.multiply(fraction2);
+        }
+        else if (operator.equals("/")){
+            fraction1.divide(fraction2);
         }
 
-        Scanner foobar = new Scanner(frac2);
-        if (frac2.contains("_")){
-            foobar.useDelimiter("_");
-            wholeFrac2 = foobar.nextInt();
-            foobar.useDelimiter("/");
-            numFrac2 = foobar.nextInt();
-            denomFrac2 = foobar.nextInt();
-        }
-        else {
-            foobar.useDelimiter("/");
-            numFrac2 = foobar.nextInt();
-            denomFrac2 = foobar.nextInt();
-        }
+        return fraction2.toAnswer();
 
-
-        String s = "whole:" + wholeFrac2 + " numerator:" + numFrac2 + " denominator:" + denomFrac2;
-        return s;
 
     }
 

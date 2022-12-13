@@ -1,19 +1,30 @@
+import java.util.Scanner;
 public class Fraction {
 	private int numerator;
 	private int denominator;
 	private int wholeNumber;
 
 
-	public Fraction(int wholeNumber, int numerator, int denominator){
-		this.wholeNumber = wholeNumber;
-		this.numerator = numerator;
-		this.denominator = denominator;
+	public Fraction(String fraction){
+		Scanner fractionScanner = new Scanner(fraction);
+		if (fraction.contains("_")){
+			fractionScanner.useDelimiter("_");
+			this.wholeNumber = Integer.parseInt(fractionScanner.next());
+		}
+		fractionScanner.useDelimiter("/");
+		this.numerator = Integer.parseInt(fractionScanner.next());
+		this.denominator = Integer.parseInt(fractionScanner.next());
 	}
 
-	public String toImproperFrac() {
-		int improper = (this.wholeNumber * this.denominator) + this.numerator;
-		return improper + "/" + this.denominator;
+	public Fraction() {
 
+	}
+
+	public void toImproper() {
+		if (this.wholeNumber != 0) {
+			this.numerator = (this.wholeNumber * this.denominator) + this.numerator;
+			this.wholeNumber = 0;
+		}
 	}
 
 	public int getDenominator() {
@@ -41,28 +52,18 @@ public class Fraction {
 	}
 
 	public void add(Fraction different) {
-		if (this.denominator == different.getDenominator()) {
-			this.numerator += different.getNumerator();
-
-		}
-		else {
+		if (this.denominator != different.getDenominator()) {
 			this.denominator *= different.getDenominator();
-			this.numerator += different.getNumerator();
-
 		}
-
+		this.numerator += different.getNumerator();
 	}
 
 	public void subtract(Fraction different){
-		if (this.denominator == different.getDenominator()) {
-			this.numerator -= different.getNumerator();
-
-		}
-		else {
+		if (this.denominator != different.getDenominator()) {
 			this.denominator *= different.getDenominator();
-			this.numerator -= different.getNumerator();
 
 		}
+		this.numerator -= different.getNumerator();
 	}
 
 	public void multiply(Fraction different) {
@@ -75,6 +76,14 @@ public class Fraction {
 		this.numerator *= different.getDenominator();
 		this.denominator *= different.getNumerator();
 
+	}
+
+	public String toAnswer(){
+		return this.numerator + "/" + this.denominator;
+	}
+
+	public String toString(){
+		return "whole:" + this.wholeNumber + " numerator:" + this.numerator + " denominator:" + this.denominator;
 	}
 }
 
