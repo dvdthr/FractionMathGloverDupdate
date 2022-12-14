@@ -90,42 +90,43 @@ public class FracCalc {
                 frac2denom = 1;
             }
         }
-
+        int numSum = 0;
+        int denomSum = 0;
         if (operator.equals("+")){
             if (frac1denom != frac2denom){
-            int numSum = (frac1num * frac2denom) + (frac2num * frac1denom);
-            int denomSum = (frac1denom * frac2denom);
+            numSum = (frac1num * frac2denom) + (frac2num * frac1denom);
+            denomSum = (frac1denom * frac2denom);
             return "" + numSum + "/" + denomSum;
             }
             else {
-                int numSum = frac1num + frac2num;
-                int denomSum = frac1denom;
+                numSum = frac1num + frac2num;
+                denomSum = frac1denom;
             }
         }
         if (operator.equals("-")){
             if (frac1denom != frac2denom) {
-                int numDif = (frac1num * frac2denom) - (frac2num * frac1denom);
-                int denomDif = (frac1denom * frac2denom);
-                return "" + numDif + "/" + denomDif;
+                numSum = (frac1num * frac2denom) - (frac2num * frac1denom);
+                denomSum = (frac1denom * frac2denom);
+                return "" + numSum + "/" + denomSum;
             }
             else {
-                int numDif = frac1num - frac2num;
-                int denomDif = frac1denom;
+                numSum = frac1num - frac2num;
+                denomSum = frac1denom;
             }
         }
         if (operator.equals("/")){
-            int numQuo = frac1num * frac2denom;
-            int denomQuo = frac2num * frac1denom;
-            return "" + numQuo + "/" + denomQuo;
+            numSum = frac1num * frac2denom;
+            denomSum = frac2num * frac1denom;
+            return "" + numSum + "/" + denomSum;
         }
         if (operator.equals("*")) {
-            int numPro = frac1num * frac2num;
-            int denomPro = frac1denom * frac2denom;
-            return "" + numPro + "/" + denomPro;
+            numSum = frac1num * frac2num;
+            denomSum = frac1denom * frac2denom;
+            return "" + numSum + "/" + denomSum;
         }
 
         //return "whole:" + frac2whole + " numerator:" + frac2num + " denominator:" + frac2denom;
-        return
+        return numSum + "/" + denomSum;
     }
 
     // TODO: Fill in the space below with any helper methods that you think you will need
